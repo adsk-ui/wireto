@@ -1,0 +1,19 @@
+{
+  "name": "wireto",
+  "version": "0.0.0",
+  "description": "Gulp plug-in for wiring a stream to placeholder text",
+  "main": "index.js",
+  "scripts": {
+    "test": "n/a"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adsk-ui/wireto"
+  },
+  "author": "",
+  "license": "n/a",
+  "bugs": {
+    "url": "https://github.com/adsk-ui/wireto/issues"
+  },
+  "homepage": "https://github.com/adsk-ui/wireto"
+}
