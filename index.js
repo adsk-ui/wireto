@@ -32,28 +32,35 @@ var wireto = function( placeholder, src, template, delimiter ){
  * @param  {String} filepath Path to file being wired
  * @return {String}          Formatted string
  */
-function formatAsScript(filepath){
-	return '<script src="' + slash(filepath) + '"></script>\n';
+function formatAsScript(filepath, options){
+	return '<script src="' + slash(path.join(options.basePath, filepath)) + '"></script>\n';
 }
 /**
  * Formats filepath as string
  * @param  {String} filepath Path to file being wired
  * @return {String}          Formatted string
  */
-function formatAsString(filepath){
-	return '\n"' + slash(path.join('src', 'app', 'autoload', filepath)) + '"';
+function formatAsString(filepath, options){
+	return '\n"' + slash(path.join(options.basePath, filepath)) + '"';
 }
 /**
  * Returns a formatter function based on input parameter
  * @param  {String} format The desired format to wire files as
  * @return {Function}        The formatter function to use
  */
-wireto.formatAs = function(format){
+wireto.formatAs = function(format, options){
+	options = options || {};
+	options.basePath = options.basePath || '';
+	function curry(fn){
+		return function(filepath){
+			return fn.apply(null, [filepath, options]);
+		};
+	}
 	switch(format){
 		case 'script':
-			return formatAsScript;
+			return curry(formatAsScript);
 		case 'string':
-			return formatAsString;
+			return curry(formatAsString);
 		default:
 			throw new Error('Invalid format');
 	}
