@@ -1,7 +1,5 @@
 var through = require('through2');
 var fs = require('fs');
-var util = require('gulp-util');
-var es = require('event-stream');
 var path = require('path');
 var slash = require('slash');
 
