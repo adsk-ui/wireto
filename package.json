@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/adsk-ui/wireto",
   "dependencies": {
-  	"through2": "^0.6.3",
-	"event-stream": "^3.1.7",
-  	"gulp-util": "^2.2.14",
-  	"path": "^0.4.9"
+    "event-stream": "^3.1.7",
+    "gulp-util": "^2.2.14",
+    "path": "^0.4.9",
+    "slash": "^1.0.0",
+    "through2": "^0.6.3"
   }
 }
