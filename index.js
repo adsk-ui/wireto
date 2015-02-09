@@ -3,8 +3,9 @@ var fs = require('fs');
 var util = require('gulp-util');
 var es = require('event-stream');
 var path = require('path');
+var slash = require('slash');
 
-module.exports = function( placeholder, src, template, delimiter ){
+var wireto = function( placeholder, src, template, delimiter ){
 	var buffer = [],
 		srcPaths = [];
 	template = template || function(x){return x;};
@@ -27,3 +28,37 @@ module.exports = function( placeholder, src, template, delimiter ){
 		});
 	});
 };
+
+/**
+ * Formats filepath as script tag
+ * @param  {String} filepath Path to file being wired
+ * @return {String}          Formatted string
+ */
+function formatAsScript(filepath){
+	return '<script src="' + slash(filepath) + '"></script>\n';
+}
+/**
+ * Formats filepath as string
+ * @param  {String} filepath Path to file being wired
+ * @return {String}          Formatted string
+ */
+function formatAsString(filepath){
+	return '\n"' + slash(path.join('src', 'app', 'autoload', filepath)) + '"';
+}
+/**
+ * Returns a formatter function based on input parameter
+ * @param  {String} format The desired format to wire files as
+ * @return {Function}        The formatter function to use
+ */
+wireto.formatAs = function(format){
+	switch(format){
+		case 'script':
+			return formatAsScript;
+		case 'string':
+			return formatAsString;
+		default:
+			throw new Error('Invalid format');
+	}
+};
+
+module.exports = wireto;
