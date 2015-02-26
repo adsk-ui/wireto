@@ -71,7 +71,7 @@ wireto.formatAs = function(format, options){
 		case 'string':
 			return curry(formatAsString);
 		case 'amd-path':
-			return curry(formatAsAmdPath);amd
+			return curry(formatAsAmdPath);
 		default:
 			throw new Error('Invalid format');
 	}
