@@ -44,6 +44,15 @@ function formatAsString(filepath, options){
 	return '\n"' + slash(path.join(options.basePath, filepath)) + '"';
 }
 /**
+ * Formats filepath as AMD path by removing the extension.
+ * @param  {String} filepath Path to file being wired
+ * @param  {Object} options  [description]
+ * @return {String}          [description]
+ */
+function formatAsAmdPath(filepath, options){
+	return formatAsString(filepath, options).replace(/\.js/, '');
+}
+/**
  * Returns a formatter function based on input parameter
  * @param  {String} format The desired format to wire files as
  * @return {Function}        The formatter function to use
@@ -61,6 +70,8 @@ wireto.formatAs = function(format, options){
 			return curry(formatAsScript);
 		case 'string':
 			return curry(formatAsString);
+		case 'amd-path':
+			return curry(formatAsAmdPath);amd
 		default:
 			throw new Error('Invalid format');
 	}
