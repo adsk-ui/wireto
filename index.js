@@ -73,7 +73,7 @@ wireto.formatAs = function(format, options){
 		case 'amd-path':
 			return curry(formatAsAmdPath);
 		default:
-			throw new Error('Invalid format');
+			throw new Error('Unsupported format: ' + format + ' passed to wireto.formatAs');
 	}
 };
 
